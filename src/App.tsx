@@ -6,6 +6,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Register from "./pages/Register";
+import About from "./pages/About";
+import Schedule from "./pages/Schedule";
+import FAQ from "./pages/FAQ";
+import Sponsors from "./pages/Sponsors";
 import NotFound from "./pages/NotFound";
 
 // Add a background pattern style
@@ -31,6 +35,10 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/sponsors" element={<Sponsors />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
