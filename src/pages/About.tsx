@@ -141,7 +141,7 @@ const About = () => {
                 </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
           
           <motion.div 
             className="max-w-3xl mx-auto"
