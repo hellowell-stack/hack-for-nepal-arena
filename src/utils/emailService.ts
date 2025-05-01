@@ -1,5 +1,5 @@
 
-import nodemailer from 'nodemailer';
+import * as nodemailerModule from 'nodemailer';
 
 // Create a mock transporter for client-side code
 // In a real application, this would be a backend API endpoint
@@ -19,7 +19,7 @@ const createTransporter = () => {
   }
 
   // For server environment, create a real transporter
-  return nodemailer.createTransport({
+  return nodemailerModule.createTransport({
     host: 'smtp.example.com',
     port: 587,
     secure: false,
