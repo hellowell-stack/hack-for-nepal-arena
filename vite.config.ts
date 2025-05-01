@@ -22,7 +22,10 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     rollupOptions: {
-      external: ['nodemailer'] // Add nodemailer as external dependency
+      external: ['nodemailer'] // Keep nodemailer as external dependency
     }
+  },
+  optimizeDeps: {
+    exclude: ['nodemailer'] // Exclude nodemailer from dependency optimization
   }
 }));

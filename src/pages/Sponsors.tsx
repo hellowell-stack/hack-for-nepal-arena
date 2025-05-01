@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Medal } from "lucide-react";
 import { HandShake, BadgeCheck } from "@/components/ui/custom-icons";
-import { motion } from "@/components/ui/motion";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
 const Sponsors = () => {
@@ -86,12 +85,7 @@ const Sponsors = () => {
       <Navbar />
       <div className="flex-grow py-24 px-4 bg-grid-pattern">
         <div className="container mx-auto">
-          <motion.div 
-            className="max-w-4xl mx-auto text-center mb-20"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="max-w-4xl mx-auto text-center mb-20">
             <div className="inline-block p-2 mb-6 bg-muted/50 rounded-full">
               <span className="w-16 h-16 bg-nepal-red/10 flex items-center justify-center rounded-full">
                 <HandShake className="text-nepal-red w-8 h-8" />
@@ -104,18 +98,12 @@ const Sponsors = () => {
               HackForNepal wouldn't be possible without the generous support of our sponsors and partners.
               We're grateful for their commitment to fostering innovation in Nepal.
             </p>
-          </motion.div>
+          </div>
           
           {/* Current Sponsors */}
           <div className="mb-32">
             {sponsorTiers.map((tier, tierIndex) => (
-              <motion.div 
-                key={tierIndex} 
-                className="mb-24 last:mb-0"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 * tierIndex }}
-              >
+              <div key={tierIndex} className="mb-24 last:mb-0">
                 <div className="flex items-center justify-center mb-12 max-w-4xl mx-auto">
                   <div className="h-0.5 flex-grow bg-gradient-to-r from-transparent to-gray-200"></div>
                   <div className="px-8 py-2 bg-card rounded-full shadow-sm border border-muted mx-4">
@@ -131,13 +119,7 @@ const Sponsors = () => {
                       : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
                   }`}>
                     {tier.sponsors.map((sponsor, sponsorIndex) => (
-                      <motion.div 
-                        key={sponsorIndex} 
-                        className="group"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3, delay: 0.2 + (0.05 * sponsorIndex) }}
-                      >
+                      <div key={sponsorIndex} className="group">
                         <Card className={`
                           h-full overflow-hidden hover:shadow-md transition-all 
                           ${tier.tier === "Platinum Sponsors" ? "border-nepal-red/20" : 
@@ -179,38 +161,22 @@ const Sponsors = () => {
                             </h3>
                           </CardContent>
                         </Card>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
           
-          {/* Newsletter Signup - NEW */}
-          <motion.div
-            className="max-w-2xl mx-auto mb-32"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
+          {/* Newsletter Signup */}
+          <div className="max-w-2xl mx-auto mb-32">
             <NewsletterSignup />
-          </motion.div>
+          </div>
           
           {/* Become a Sponsor */}
-          <motion.div 
-            className="max-w-5xl mx-auto mb-32"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
+          <div className="max-w-5xl mx-auto mb-32">
             <Card className="bg-gradient-to-br from-card to-muted/50 overflow-hidden border-none shadow-lg relative">
-              {/* Background decorative elements */}
-              <div className="absolute top-0 right-0 w-80 h-80 bg-nepal-red/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-nepal-blue/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
-              <div className="absolute top-1/3 left-1/4 w-20 h-20 bg-nepal-red/5 rounded-full blur-xl"></div>
-              <div className="absolute bottom-1/4 right-1/3 w-16 h-16 bg-nepal-blue/5 rounded-full blur-xl"></div>
-              
               <CardContent className="p-10 relative z-10">
                 <div className="flex justify-center mb-8">
                   <div className="inline-block p-3 bg-muted/50 rounded-full">
@@ -230,7 +196,6 @@ const Sponsors = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <div className="relative">
-                    <div className="absolute -top-6 -left-6 w-32 h-32 bg-nepal-red/5 rounded-full blur-2xl"></div>
                     <h3 className="text-2xl font-semibold mb-6 flex items-center">
                       <BadgeCheck className="w-6 h-6 mr-3 text-nepal-red" />
                       Why Sponsor?
@@ -254,7 +219,6 @@ const Sponsors = () => {
                   </div>
                   
                   <div className="relative">
-                    <div className="absolute -top-6 -right-6 w-32 h-32 bg-nepal-blue/5 rounded-full blur-2xl"></div>
                     <h3 className="text-2xl font-semibold mb-6 flex items-center">
                       <Medal className="w-6 h-6 mr-3 text-nepal-blue" />
                       Sponsorship Tiers
@@ -295,15 +259,10 @@ const Sponsors = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
           
           {/* Sponsor Benefits */}
-          <motion.div 
-            className="max-w-5xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
+          <div className="max-w-5xl mx-auto">
             <div className="flex justify-center mb-12">
               <div className="inline-block p-2 bg-muted/50 rounded-full">
                 <span className="w-12 h-12 bg-nepal-blue/10 flex items-center justify-center rounded-full">
@@ -372,7 +331,7 @@ const Sponsors = () => {
                 <a href="mailto:sponsors@hackfornepal.com">Request Sponsorship Package</a>
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
       <Footer />
