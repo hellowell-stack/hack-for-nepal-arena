@@ -15,7 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { sendEmail } from "@/utils/emailService";
+import { sendContactFormSubmission } from "@/utils/emailService";
+import { Mail, Send, Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,6 +37,7 @@ const formSchema = z.object({
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [charCount, setCharCount] = useState(0);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,16 +54,12 @@ export default function ContactForm() {
     
     try {
       // In a real app, this would be handled by a backend API
-      const emailResult = await sendEmail({
-        to: "hackathon@example.com",
-        subject: `Contact Form: ${values.subject}`,
-        text: `
-          Name: ${values.name}
-          Email: ${values.email}
-          
-          ${values.message}
-        `,
-      }).catch(error => {
+      const emailResult = await sendContactFormSubmission(
+        values.name,
+        values.email,
+        values.subject,
+        values.message
+      ).catch(error => {
         console.error("Email sending failed:", error);
         return { success: false };
       });
@@ -69,6 +67,7 @@ export default function ContactForm() {
       if (emailResult?.success) {
         toast.success("Message sent successfully! We'll get back to you soon.");
         form.reset();
+        setCharCount(0);
       } else {
         toast.error("There was an issue sending your message. Please try again or contact us directly.");
       }
@@ -80,8 +79,22 @@ export default function ContactForm() {
     }
   }
 
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCharCount(e.target.value.length);
+  };
+
   return (
-    <div className="max-w-2xl mx-auto bg-card p-8 rounded-lg shadow-sm">
+    <div className="max-w-2xl mx-auto bg-card p-8 rounded-lg shadow-sm border border-border/50">
+      <div className="mb-6 flex items-center justify-center">
+        <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+          <Mail className="h-6 w-6 text-primary" />
+        </div>
+      </div>
+      <h2 className="text-2xl font-bold text-center mb-6">Get In Touch</h2>
+      <p className="text-center text-muted-foreground mb-8">
+        Have questions about HackForNepal? We'd love to hear from you!
+      </p>
+      
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -138,16 +151,39 @@ export default function ContactForm() {
                   <Textarea 
                     placeholder="Your message..." 
                     className="min-h-32"
-                    {...field} 
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      handleMessageChange(e);
+                    }}
                   />
                 </FormControl>
-                <FormMessage />
+                <div className="flex justify-between items-center mt-1">
+                  <FormMessage />
+                  <span className={`text-xs ${charCount > 900 ? 'text-amber-500' : 'text-muted-foreground'}`}>
+                    {charCount}/1000
+                  </span>
+                </div>
               </FormItem>
             )}
           />
           
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? "Sending..." : "Send Message"}
+          <Button 
+            type="submit" 
+            className="w-full group" 
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              <>
+                <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                Send Message
+              </>
+            )}
           </Button>
         </form>
       </Form>

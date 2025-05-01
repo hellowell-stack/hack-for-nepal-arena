@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Award, Medal } from "lucide-react";
 import { HandShake, BadgeCheck } from "@/components/ui/custom-icons";
 import { motion } from "@/components/ui/motion";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 const Sponsors = () => {
   const sponsorTiers = [
@@ -185,6 +186,16 @@ const Sponsors = () => {
               </motion.div>
             ))}
           </div>
+          
+          {/* Newsletter Signup - NEW */}
+          <motion.div
+            className="max-w-2xl mx-auto mb-32"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <NewsletterSignup />
+          </motion.div>
           
           {/* Become a Sponsor */}
           <motion.div 
